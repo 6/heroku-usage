@@ -36,7 +36,7 @@ function* run (context, heroku) {
   let totalAddonCostCents = _(orgAddons).map('plan.price.cents').sum()
   let formattedMonthlyAddonCost = numeral(Math.ceil(totalAddonCostCents / 100))
 
-  cli.styledHeader("Usage for pay period starting on " + moment(invoiceStartedAt).utc().format("MMM Do YYYY") + "\n");
+  cli.styledHeader("Usage for pay period: " + moment(invoiceStartedAt).utc().format("MMM Do YYYY") + " - " + moment(invoiceEndsAt).utc().format("MMM Do YYYY") + "\n");
 
   cli.table([
     {metric: 'Dyno units (current)',  value: Math.round(currentInvoice.dyno_units)},
