@@ -9,7 +9,9 @@
     "heroku-plugin"
   ],
   "scripts": {
-    "test": "standard"
+    "test": "standard",
+    "preversion": "npm test",
+    "postversion": "npm publish && git push && git push --tags"
   },
   "license": "ISC",
   "dependencies": {
