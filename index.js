@@ -1,9 +1,9 @@
 'use strict'
 exports.topic = {
-  name: 'hello',
-  description: 'a topic for the hello world plugin'
+  name: 'usage',
+  description: 'current and estimated usage'
 }
 
 exports.commands = [
-  require('./commands/world.js')
+  require('./commands/estimate.js')
 ]

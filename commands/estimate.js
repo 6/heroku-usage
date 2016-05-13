@@ -22,10 +22,10 @@ function* run (context, heroku) {
 }
 
 module.exports = {
-  topic: 'hello',
-  command: 'world',
-  description: 'says hello',
-  help: 'help text for hello:world',
+  topic: 'usage',
+  command: 'estimate',
+  description: 'displays estimated monthly usage',
+  help: 'Usage: heroku usage:estimate --org ORG',
   needsAuth: true,
   needsOrg: true,
   run: cli.command(co.wrap(run))
