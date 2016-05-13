@@ -1,6 +1,7 @@
 'use strict'
 let cli = require('heroku-cli-util')
 let co = require('co')
+let moment = require('moment')
 let _ = require('lodash')
 
 function* run (context, heroku) {
@@ -20,10 +21,23 @@ function* run (context, heroku) {
       path: `/organizations/${context.org}/invoices`,
     })
   }
-  let currentInvoice = _(res.invoices).sortBy('period_start').reverse().value()[0];
 
-  cli.debug(`Found ${res.apps.length} apps with ${res.addons.length} addons total.`)
-  cli.debug(currentInvoice)
+  let currentInvoice = _(res.invoices).sortBy('period_start').reverse().value()[0];
+  let invoiceStartedAt = Date.parse(currentInvoice.created_at);
+  let invoiceEndsAt = Date.parse(moment(currentInvoice.created_at).add({months: 1}).add({days: 1}).utc().format());
+  let percentInvoiceDurationElapsed = (Date.now() - invoiceStartedAt) / (invoiceEndsAt - invoiceStartedAt);
+  let estimatedDynoUnits = currentInvoice.dyno_units / percentInvoiceDurationElapsed;
+
+  cli.table([
+    {metric: 'Dyno units (current)',  value: Math.round(currentInvoice.dyno_units)},
+    {metric: 'Dyno units (estimated)', value: Math.round(estimatedDynoUnits)},
+    {metric: 'Addons', value: "$TODO"},
+  ],{
+    columns: [
+      {key: 'metric'},
+      {key: 'value', label: 'Value', format: language => cli.color.green(language)},
+    ],
+  });
 }
 
 module.exports = {
