@@ -5,5 +5,5 @@ exports.topic = {
 }
 
 exports.commands = [
-  require('./commands/estimate.js')
+  require('./commands/monthly.js')
 ]

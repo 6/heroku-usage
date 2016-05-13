@@ -28,10 +28,12 @@ function* run (context, heroku) {
   let percentInvoiceDurationElapsed = (Date.now() - invoiceStartedAt) / (invoiceEndsAt - invoiceStartedAt);
   let estimatedDynoUnits = currentInvoice.dyno_units / percentInvoiceDurationElapsed;
 
+  cli.styledHeader("Usage for pay period starting on " + moment(invoiceStartedAt).utc().format("MMM Do YYYY") + "\n");
+
   cli.table([
     {metric: 'Dyno units (current)',  value: Math.round(currentInvoice.dyno_units)},
     {metric: 'Dyno units (estimated)', value: Math.round(estimatedDynoUnits)},
-    {metric: 'Addons', value: "$TODO"},
+    {metric: 'Addons', value: "$TODO / month"},
   ],{
     columns: [
       {key: 'metric'},
@@ -42,9 +44,9 @@ function* run (context, heroku) {
 
 module.exports = {
   topic: 'usage',
-  command: 'estimate',
-  description: 'displays estimated monthly usage',
-  help: 'Usage: heroku usage:estimate --org ORG',
+  command: 'monthly',
+  description: 'displays current and estimated monthly usage',
+  help: 'Usage: heroku usage:monthly --org ORG',
   needsAuth: true,
   needsOrg: true,
   run: cli.command(co.wrap(run))
