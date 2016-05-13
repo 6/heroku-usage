@@ -8,5 +8,9 @@
   "keywords": [
     "heroku-plugin"
   ],
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "co": "^4.6.0",
+    "heroku-cli-util": "^5.10.10"
+  }
 }
