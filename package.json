@@ -1,6 +1,6 @@
 {
   "name": "heroku-usage",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Heroku CLI plugin to display current and estimated usage",
   "main": "index.js",
   "author": "Peter Graham",
