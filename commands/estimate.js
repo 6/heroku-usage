@@ -1,6 +1,7 @@
 'use strict'
 let cli = require('heroku-cli-util')
-let co  = require('co')
+let co = require('co')
+let _ = require('lodash')
 
 function* run (context, heroku) {
   let res = yield {
@@ -19,7 +20,7 @@ function* run (context, heroku) {
       path: `/organizations/${context.org}/invoices`,
     })
   }
-  let currentInvoice = res.invoices[res.invoices.length - 1];
+  let currentInvoice = _(res.invoices).sortBy('period_start').reverse().value()[0];
 
   cli.debug(`Found ${res.apps.length} apps with ${res.addons.length} addons total.`)
   cli.debug(currentInvoice)
