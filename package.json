@@ -8,6 +8,9 @@
   "keywords": [
     "heroku-plugin"
   ],
+  "scripts": {
+    "test": "standard"
+  },
   "license": "ISC",
   "dependencies": {
     "co": "^4.6.0",
@@ -15,5 +18,8 @@
     "lodash": "^4.12.0",
     "moment": "^2.13.0",
     "numeral": "^1.5.3"
+  },
+  "devDependencies": {
+    "standard": "^7.0.1"
   }
 }
