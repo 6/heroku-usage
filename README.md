@@ -12,7 +12,9 @@ Dyno units (estimated): 155
 
 ### how to install
 
-TBD
+```sh-session
+heroku plugins:install heroku-usage
+```
 
 ### local development tips
 
