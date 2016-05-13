@@ -1,10 +1,10 @@
 {
-  "name": "heroku-estimated-usage",
+  "name": "heroku-usage",
   "version": "1.0.0",
-  "description": "basic example heroku plugin",
+  "description": "Heroku CLI plugin to display current and estimated usage",
   "main": "index.js",
   "author": "Peter Graham",
-  "repository": "6/heroku-estimated-usage",
+  "repository": "6/heroku-usage",
   "keywords": [
     "heroku-plugin"
   ],
