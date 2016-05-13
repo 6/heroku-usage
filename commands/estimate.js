@@ -4,6 +4,10 @@ let co  = require('co')
 
 function* run (context, heroku) {
   let res = yield {
+    apps: heroku.request({
+      method: 'GET',
+      path: `/organizations/${context.org}/apps`,
+    }),
     addons: heroku.request({
       method: 'GET',
       path: '/addons',
@@ -17,7 +21,7 @@ function* run (context, heroku) {
   }
   let currentInvoice = res.invoices[res.invoices.length - 1];
 
-  cli.debug(`Found ${res.addons.length} addons total.`)
+  cli.debug(`Found ${res.apps.length} apps with ${res.addons.length} addons total.`)
   cli.debug(currentInvoice)
 }
 
