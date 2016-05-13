@@ -1,0 +1,12 @@
+{
+  "name": "heroku-estimated-usage",
+  "version": "1.0.0",
+  "description": "basic example heroku plugin",
+  "main": "index.js",
+  "author": "Peter Graham",
+  "repository": "6/heroku-estimated-usage",
+  "keywords": [
+    "heroku-plugin"
+  ],
+  "license": "ISC"
+}
