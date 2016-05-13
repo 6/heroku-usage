@@ -2,6 +2,14 @@
 
 Heroku CLI plugin to show current and estimated dyno + addon usage at the organization level.
 
+```sh-session
+$ heroku usage:monthly --org myorg
+=== Usage for pay period: May 1st 2016 - Jun 1st 2016
+Addons:                 $2964 / month
+Dyno units (current):   62
+Dyno units (estimated): 155
+```
+
 ### how to install
 
 TBD
