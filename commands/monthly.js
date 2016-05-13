@@ -3,6 +3,7 @@ let cli = require('heroku-cli-util')
 let co = require('co')
 let moment = require('moment')
 let _ = require('lodash')
+let numeral = require('numeral')
 
 function* run (context, heroku) {
   let res = yield {
@@ -28,12 +29,19 @@ function* run (context, heroku) {
   let percentInvoiceDurationElapsed = (Date.now() - invoiceStartedAt) / (invoiceEndsAt - invoiceStartedAt);
   let estimatedDynoUnits = currentInvoice.dyno_units / percentInvoiceDurationElapsed;
 
+  let orgAppIds = _(res.apps).map('id').value()
+  let orgAddons = _(res.addons).filter(function(addon) {
+    return _.includes(orgAppIds, addon.app.id)
+  }).value()
+  let totalAddonCostCents = _(orgAddons).map('plan.price.cents').sum()
+  let formattedMonthlyAddonCost = numeral(Math.ceil(totalAddonCostCents / 100))
+
   cli.styledHeader("Usage for pay period starting on " + moment(invoiceStartedAt).utc().format("MMM Do YYYY") + "\n");
 
   cli.table([
     {metric: 'Dyno units (current)',  value: Math.round(currentInvoice.dyno_units)},
     {metric: 'Dyno units (estimated)', value: Math.round(estimatedDynoUnits)},
-    {metric: 'Addons', value: "$TODO / month"},
+    {metric: 'Addons', value: "$" + formattedMonthlyAddonCost +  " / month"},
   ],{
     columns: [
       {key: 'metric'},
