@@ -5,6 +5,5 @@ exports.topic = {
 }
 
 exports.commands = [
-  require('./commands/world.js'),
-  require('./commands/app.js')
+  require('./commands/world.js')
 ]
