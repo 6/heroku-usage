@@ -23,7 +23,7 @@ function* run (context, heroku) {
     })
   }
 
-  let currentInvoice = _(res.invoices).sortBy('period_start').reverse().value()[0];
+  let currentInvoice = _(res.invoices).sortBy('period_start').last();
   let invoiceStartedAt = Date.parse(currentInvoice.created_at);
   let invoiceEndsAt = Date.parse(moment(currentInvoice.created_at).add({months: 1}).add({days: 1}).utc().format());
   let percentInvoiceDurationElapsed = (Date.now() - invoiceStartedAt) / (invoiceEndsAt - invoiceStartedAt);
